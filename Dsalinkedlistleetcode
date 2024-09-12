@@ -1,0 +1,37 @@
+class Solution {
+public:
+    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
+        // Initialize two pointers, ptr1 for the first list (headA) and ptr2 for the second list (headB).
+        ListNode *ptr1 = headA;
+        ListNode *ptr2 = headB;
+
+        // Traverse both lists until the two pointers meet at the intersection node.
+        // If there is no intersection, they will both eventually point to NULL, and the loop will stop.
+        while(ptr1 != ptr2) {
+            
+            // If ptr1 reaches the end of list A, set it to the head of list B.
+            // This allows ptr1 to traverse list B after finishing list A.
+            if(ptr1 == NULL) {
+                ptr1 = headB;
+            }
+            // Otherwise, move ptr1 to the next node in list A.
+            else {
+                ptr1 = ptr1->next;
+            }
+            
+            // If ptr2 reaches the end of list B, set it to the head of list A.
+            // This allows ptr2 to traverse list A after finishing list B.
+            if(ptr2 == NULL) {
+                ptr2 = headA;
+            }
+            // Otherwise, move ptr2 to the next node in list B.
+            else {
+                ptr2 = ptr2->next;
+            }
+        }
+
+        // When ptr1 and ptr2 meet, either at the intersection node or at NULL (if no intersection),
+        // return ptr1 (or ptr2, since they are equal at this point).
+        return ptr1;
+    }
+};
